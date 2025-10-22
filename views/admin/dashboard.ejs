@@ -1,0 +1,29 @@
+<% include('../layout', { title: 'Admin Dashboard', body: `
+<div class="admin-header">
+  <h2>Dashboard</h2>
+  <div>
+    <a class="btn" href="/admin/channel/new">Novo canal</a>
+    <a class="btn ghost" href="/admin/logout">Sair</a>
+  </div>
+</div>
+
+<table class="table">
+  <thead><tr><th>Título</th><th>Stream</th><th>Criado</th><th>Ações</th></tr></thead>
+  <tbody>
+    ${channels.map(c => `
+      <tr>
+        <td>${c.title}</td>
+        <td style="max-width:40ch; overflow:hidden; text-overflow:ellipsis;">${c.stream_url}</td>
+        <td>${new Date(c.created_at).toLocaleString()}</td>
+        <td>
+          <a class="btn small" href="/player/${c.id}" target="_blank">Abrir</a>
+          <a class="btn small" href="/admin/channel/${c.id}/edit">Editar</a>
+          <form style="display:inline" method="POST" action="/admin/channel/${c.id}/delete" onsubmit="return confirm('Deletar canal?');">
+            <button class="btn small danger" type="submit">Deletar</button>
+          </form>
+        </td>
+      </tr>
+    `).join('')}
+  </tbody>
+</table>
+` }) %>

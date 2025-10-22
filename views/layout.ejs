@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title><%= title || 'Multiverse TV' %></title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="/">Multiverse TV</a>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/about">Sobre</a>
+        <% if (user) { %>
+          <a href="/admin">Admin</a>
+          <a href="/admin/logout">Sair</a>
+        <% } else { %>
+          <a href="/admin/login">Admin</a>
+        <% } %>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <%= body %>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© Multiverse TV — demo</small>
+    </div>
+  </footer>
+
+  <script>
+  // If local vendor/hls.min.js exists it will be loaded; otherwise load from CDN dynamically
+  (function(){
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', '/public/vendor/hls.min.js', true);
+    xhr.onload = function(){
+      if(xhr.status === 200){
+        var s = document.createElement('script'); s.src='/public/vendor/hls.min.js'; document.body.appendChild(s);
+      } else {
+        var s = document.createElement('script'); s.src='https://cdn.jsdelivr.net/npm/hls.js@latest'; document.body.appendChild(s);
+      }
+    };
+    xhr.onerror = function(){
+      var s = document.createElement('script'); s.src='https://cdn.jsdelivr.net/npm/hls.js@latest'; document.body.appendChild(s);
+    };
+    xhr.send();
+  })();
+  </script>
+  <script src="/public/js/player.js"></script>
+  <script src="/public/js/admin.js"></script>
+</body>
+</html>

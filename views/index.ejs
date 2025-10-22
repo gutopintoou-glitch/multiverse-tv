@@ -1,0 +1,19 @@
+<% include('layout', { title: 'Home - Multiverse TV', body: `
+<section class="hero">
+  <h1>Multiverse TV</h1>
+  <p>Escolha um canal e assista ao vivo.</p>
+</section>
+
+<section class="grid">
+  ${channels.map(c => `
+    <article class="card">
+      <img src="${c.poster || '/public/img/default-poster.jpg'}" alt="${c.title}">
+      <div class="card-body">
+        <h3>${c.title}</h3>
+        <p>${c.description ? (c.description.length>120 ? c.description.slice(0,120)+'...' : c.description) : ''}</p>
+        <a class="btn" href="/player/${c.id}">Assistir</a>
+      </div>
+    </article>
+  `).join('')}
+</section>
+` }) %>

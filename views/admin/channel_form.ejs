@@ -1,0 +1,23 @@
+<% include('../layout', { title: (channel ? 'Editar Canal' : 'Novo Canal'), body: `
+<div class="card">
+  <h3>${channel ? 'Editar canal' : 'Criar canal'}</h3>
+  <form method="POST" action="${action}">
+    <label>Título
+      <input name="title" value="${channel ? channel.title : ''}" required />
+    </label>
+    <label>Descrição
+      <textarea name="description">${channel ? channel.description : ''}</textarea>
+    </label>
+    <label>Stream (URL .m3u8 ou MP4)
+      <input name="stream_url" value="${channel ? channel.stream_url : ''}" required />
+    </label>
+    <label>Poster (URL relativo/absoluto)
+      <input name="poster" value="${channel ? channel.poster : ''}" />
+    </label>
+    <div style="display:flex;gap:.5rem;margin-top:1rem">
+      <button class="btn" type="submit">Salvar</button>
+      <a class="btn ghost" href="/admin">Cancelar</a>
+    </div>
+  </form>
+</div>
+` }) %>

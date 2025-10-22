@@ -1,0 +1,21 @@
+<% include('layout', { title: channel.title + ' — Multiverse TV', body: `
+<div class="player-wrap">
+  <h2>${channel.title}</h2>
+  <p class="muted">${channel.description || ''}</p>
+
+  <div class="player-card">
+    <video id="video" controls playsinline poster="${channel.poster || '/public/img/default-poster.jpg'}" preload="metadata" crossorigin="anonymous">
+      <source src="${channel.stream_url}" type="application/x-mpegURL">
+      Seu navegador não suporta vídeo.
+    </video>
+  </div>
+
+  <div class="player-meta">
+    <a class="btn" href="/">Voltar</a>
+  </div>
+</div>
+
+<script>
+  window.__STREAM_URL__ = ${JSON.stringify(channel.stream_url)};
+</script>
+` }) %>
